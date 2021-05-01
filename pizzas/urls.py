@@ -8,6 +8,8 @@ import pizzas
 from . import views
 
 app_name = 'pizzas'
+from django.conf.urls.static import static
+from pizzeria import settings
 
 # A list of individual pages' urls
 urlpatterns = [
@@ -22,5 +24,5 @@ urlpatterns = [
     path('new_topping/<int:pizza_id>/' ,views.single_pizza, name='new_topping'),
     path('new_topping/',views.new_topping, name='new_topping'),
 
-]
+]+static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
 
