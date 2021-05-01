@@ -22,10 +22,10 @@ def pies(request):
 
 @login_required
 def single_pizza(request,pizza_id):
-    pie = Pizza.objects.get(id=pizza_id)  
-    top = Topping.entry_set
+    pie = Pizza.objects.get(id=pizza_id)
+    top = pie.topping_set
 
-    if pie.owner != request.user:
+    if pie.own != request.user:
         raise Http404
 
     context = {'pie':pie,'top':top}
@@ -33,7 +33,8 @@ def single_pizza(request,pizza_id):
     return render(request, 'pizzas/single_pizza.html',context)
 
 @login_required
-def new_pizza(request):
+def new_pizza(request,pizza_id):
+    pie = Pizza.objects.get(id=pizza_id)
     if request.method != 'POST':
         form = PizzaForm()
     else:
@@ -41,12 +42,12 @@ def new_pizza(request):
 
         if form.is_valid():
             new_pizza = form.save(commit=False)
-            new_pizza.owner = request.user
+            new_pizza.own = request.user
             new_pizza.save()
             form.save()
 
-            return redirect('pizzas:pizzas')
-    context = {'form':form}
+            
+    context = {'form':form, 'pie':pie}
     return render(request, 'pizzas/new_pizza.html',context)
 
 
@@ -54,7 +55,7 @@ def new_pizza(request):
 def new_topping(request,pizza_id):
     pizza = Pizza.objects.get(id=pizza_id)
 
-    if pizza.owner != request.user:
+    if pizza.own != request.user:
         raise Http404
 
     if request.method != 'POST':
