@@ -33,8 +33,8 @@ def single_pizza(request,pizza_id):
     return render(request, 'pizzas/single_pizza.html',context)
 
 @login_required
-def new_pizza(request,pizza_id):
-    pie = Pizza.objects.get(id=pizza_id)
+def new_pizza(request):
+    # pie = Pizza.objects.get(id=pizza_id)
     if request.method != 'POST':
         form = PizzaForm()
     else:
@@ -45,9 +45,9 @@ def new_pizza(request,pizza_id):
             new_pizza.own = request.user
             new_pizza.save()
             form.save()
-
+            # return redirect('pizzas:new_pizza', pizza_id = pizza_id)
             
-    context = {'form':form, 'pie':pie}
+    context = {'form':form}
     return render(request, 'pizzas/new_pizza.html',context)
 
 
@@ -69,5 +69,5 @@ def new_topping(request,pizza_id):
             new_topping.save()
 
             return redirect('pizzas:single_pizza', pizza_id = pizza_id)
-    context = {'form':form, 'single_pizza':pizza}
+    context = {'form':form, 'pizza':pizza}
     return render(request,'pizzas/new_topping.html',context)

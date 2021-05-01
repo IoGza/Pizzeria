@@ -3,16 +3,29 @@
 
 {% block content %}
 
+<p>Add a new topping : </p>
 
-<p><a href="{% url 'pizzas:pizzas' pizza.id%}">{{pizza}}</a></p>
+<ul>
+    {% for t in toppings %}
 
-<p>Add a new entry: </p>
-<form action="{%url 'pizzas:new_topping' pizza.id %}"method='post'>
-    {%csrf_token%}
-    {{form.as_p}}
+    <li>
+        <a href="{% url 'pizzas:single_pizza' t.id %}">{{t}}</a>
 
-    <button name ="submit" > Add topping</button>
+
+    </li>
+    {% empty %}
+    <li>No toppings have been added yet.</li>
+
+<form action="{% url 'pizzas:single_pizza' %}" method = 'post'>
+
+    {%csrf_token %}
+
+
+    {{ form.as_p }}
+
+    <button name="submit"> Add topping</button>
+
+
 </form>
-
 
 {%endblock content %}
