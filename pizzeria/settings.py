@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     # My Apps
+    'users',
     'pizzas',
     'django.contrib.admin',
     'django.contrib.auth',

@@ -6,4 +6,11 @@ class PizzaForm(forms.ModelForm):
     class Meta:
         model = Pizza
         fields = ['text']
-        label = {'text ' ':'}
+        label = {'Text' ':'}
+
+class ToppingForm(forms.ModelForm):
+    class Meta:
+        fields = ['text']   
+        label = {'Text' ':'}
+
+        widgets = {'text' : forms.Textarea(attrs={'cols':80})}

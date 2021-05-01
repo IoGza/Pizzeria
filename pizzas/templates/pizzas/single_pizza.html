@@ -4,19 +4,10 @@
 {% block content %}
 
 <p>
-    Pizza: {{pizza}}
+    Pizza: {{pizzas}}
 </p>
 
-<ul>
-    {%for p in pizzas %}
-    <li>
-        <p>
-            <a href="{% url 'pizzas:edit_entry' entry.id%}">Edit Entry</a>
-        </p>
-    </li>
-    <!-- {% empty %block}
-    <li> There are no entries for this topic yet</li> -->
-    {%endfor%}
+
 </ul>
 
 <p> <a href="{% url 'pizzas:new_pizza' pizza.id %}">Add new pizza</a></p>
