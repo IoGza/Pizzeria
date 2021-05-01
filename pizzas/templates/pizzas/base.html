@@ -1,6 +1,13 @@
 <p>
     <a href="{% url 'pizzas:index' %}">Pizza Homepage</a>
     <a href="{% url 'pizzas:pizzas' %}">Pizzas</a>
+    {% block additional_styles %}
+    <style>
+    body {
+        background-image: url(pizzas/images/pizza.jpg);
+    }
+    </style>
+    {% endblock %}
     {% if user.is_authenticated %}
     Hello ,{{user.username}}.
     <a href="{%url 'users:logout' %}">Log Out</a>

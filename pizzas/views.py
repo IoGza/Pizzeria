@@ -45,7 +45,7 @@ def new_pizza(request):
             new_pizza.own = request.user
             new_pizza.save()
             form.save()
-            # return redirect('pizzas:new_pizza', pizza_id = pizza_id)
+            return redirect('pizzas:pizzas')
             
     context = {'form':form}
     return render(request, 'pizzas/new_pizza.html',context)
@@ -68,6 +68,7 @@ def new_topping(request,pizza_id):
             new_topping.pizza = pizza
             new_topping.save()
 
-            return redirect('pizzas:single_pizza', pizza_id = pizza_id)
-    context = {'form':form, 'pizza':pizza}
+            return redirect('pizzas:pizzas', pizza_id = pizza_id)
+    context = {'pizza':pizza,'form':form }
     return render(request,'pizzas/new_topping.html',context)
+
